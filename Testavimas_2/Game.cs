@@ -59,6 +59,8 @@ namespace Testavimas_2
             SetGridValue(x, y, GetTurn());
         }
 
+        public char GetGridValue(int x, int y) => grid[x, y];
+
         public void ChangeTurn()
         {
             if(xTurn)
@@ -71,7 +73,17 @@ namespace Testavimas_2
             }
         }
 
-
+        public bool IsDraw()
+        {
+            foreach(char c in grid)
+            {
+                if(c == '\0')
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         public bool ConsecutiveValueCounter(char[] array, char value, int countToReach)
         {

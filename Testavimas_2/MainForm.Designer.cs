@@ -29,34 +29,26 @@ namespace Testavimas_2
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.turnButton = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.gridSizeTextBox = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
-            // flowLayoutPanel
+            // turnButton
             // 
-            this.flowLayoutPanel.Location = new System.Drawing.Point(13, 14);
-            this.flowLayoutPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(575, 454);
-            this.flowLayoutPanel.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(596, 14);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(238, 200);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "X";
-            this.button1.UseVisualStyleBackColor = true;
+            this.turnButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.turnButton.Location = new System.Drawing.Point(619, 13);
+            this.turnButton.Name = "turnButton";
+            this.turnButton.Size = new System.Drawing.Size(238, 200);
+            this.turnButton.TabIndex = 1;
+            this.turnButton.Text = "X";
+            this.turnButton.UseVisualStyleBackColor = true;
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(596, 252);
+            this.startButton.Location = new System.Drawing.Point(619, 251);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(238, 38);
             this.startButton.TabIndex = 2;
@@ -67,7 +59,7 @@ namespace Testavimas_2
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(595, 223);
+            this.label1.Location = new System.Drawing.Point(618, 222);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 20);
             this.label1.TabIndex = 3;
@@ -75,25 +67,33 @@ namespace Testavimas_2
             // 
             // gridSizeTextBox
             // 
-            this.gridSizeTextBox.Location = new System.Drawing.Point(679, 220);
+            this.gridSizeTextBox.Location = new System.Drawing.Point(702, 219);
             this.gridSizeTextBox.Name = "gridSizeTextBox";
             this.gridSizeTextBox.Size = new System.Drawing.Size(155, 26);
             this.gridSizeTextBox.TabIndex = 4;
             this.gridSizeTextBox.Text = "3";
             // 
+            // flowLayoutPanel
+            // 
+            this.flowLayoutPanel.Location = new System.Drawing.Point(13, 13);
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
+            this.flowLayoutPanel.Size = new System.Drawing.Size(600, 600);
+            this.flowLayoutPanel.TabIndex = 5;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(846, 482);
+            this.ClientSize = new System.Drawing.Size(861, 626);
+            this.Controls.Add(this.flowLayoutPanel);
             this.Controls.Add(this.gridSizeTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.startButton);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.flowLayoutPanel);
+            this.Controls.Add(this.turnButton);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tic-Tac-Toe";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -101,12 +101,11 @@ namespace Testavimas_2
         }
 
         #endregion
-
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button turnButton;
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox gridSizeTextBox;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
     }
 }
 
