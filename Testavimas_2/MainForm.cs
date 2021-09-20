@@ -22,8 +22,15 @@ namespace Testavimas_2
         {
             try
             {
-                game = new Game(gridSizeTextBox.Text);
+                bool xTurn = true;
+                if(turnButton.Text == "O")
+                {
+                    xTurn = false;
+                }
+                
+                game = new Game(gridSizeTextBox.Text, 3, xTurn);
                 PrepareTheBoard();
+                turnButton.Enabled = false;
             }
             catch (Exception exc)
             {
@@ -71,16 +78,32 @@ namespace Testavimas_2
             if(game.GameWon())
             {
                 flowLayoutPanel.Enabled = false;
+                turnButton.Enabled = true;
+
                 MessageBox.Show($"Game Won\nAnd The Winner Is: {turnButton.Text}");
             }
             else if(game.IsDraw())
             {
                 flowLayoutPanel.Enabled = false;
+                turnButton.Enabled = true;
+
                 MessageBox.Show($"Game Over\nIt's A Draw");
             }
             else
             {
                 turnButton.Text = game.GetTurn().ToString();
+            }
+        }
+
+        private void turnButton_Click(object sender, EventArgs e)
+        {
+            if(turnButton.Text == "X")
+            {
+                turnButton.Text = "O";
+            }
+            else
+            {
+                turnButton.Text = "X";
             }
         }
     }

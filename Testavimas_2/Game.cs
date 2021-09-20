@@ -28,13 +28,7 @@ namespace Testavimas_2
 
         public char GetTurn()
         {
-            char value = 'O';
-            if(xTurn)
-            {
-                value = 'X';
-            }
-
-            return value;
+            return GetTurn(xTurn);
         }
 
         public char GetTurn(bool xTurn)
@@ -48,12 +42,23 @@ namespace Testavimas_2
             return value;
         }
 
+        /// <summary>
+        /// Set specific value to the matrix
+        /// </summary>
+        /// <param name="x">Row index</param>
+        /// <param name="y">Column index</param>
+        /// <param name="value">Specific value to set</param>
         public void SetGridValue(int x, int y, char value)
         {
             grid[x, y] = value;
             ChangeTurn();
         }
 
+        /// <summary>
+        /// Sets value automatically based on turn, if xTurn == true, value set is 'X' 
+        /// </summary>
+        /// <param name="x">Row index</param>
+        /// <param name="y">Collumn index</param>
         public void SetGridValue(int x, int y)
         {
             SetGridValue(x, y, GetTurn());
@@ -85,7 +90,7 @@ namespace Testavimas_2
             return true;
         }
 
-        public bool ConsecutiveValueCounter(char[] array, char value, int countToReach)
+        public bool ConsecutiveValueReached(char[] array, char value, int countToReach)
         {
             int matchCount = 0;
             foreach(char c in array)
@@ -108,17 +113,15 @@ namespace Testavimas_2
             return false;
         }
 
-
-
         public bool GameWon()
         {
-            int gridDimLength = (int)Math.Sqrt(grid.Length);
+            int dim = DimensionLength(grid);
 
-            List<List<char>> lines = GetAllArrayLines(grid);
+            List<List<char>> lines = GetAllArrayLines(grid, dim);
 
             foreach(List<char> list in lines)
             {
-                if (ConsecutiveValueCounter(list.ToArray(), GetTurn(!XTurn), winLineSize))
+                if (ConsecutiveValueReached(list.ToArray(), GetTurn(!XTurn), winLineSize))
                 {
                     return true;
                 }
@@ -126,27 +129,25 @@ namespace Testavimas_2
             return false;
         }
 
-        public List<List<char>> GetAllArrayLines(char[,] array)
+        public List<List<char>> GetAllArrayLines(char[,] array, int dim)
         {
             List<List<char>> lines = new List<List<char>>();
-            int gridDimLength = (int)Math.Sqrt(grid.Length);
-
-            for (int i = 0; i < gridDimLength; i++)
+            for (int i = 0; i < dim; i++)
             {
-                lines.Add(ExtractRow(grid, i, gridDimLength).ToList());
-                lines.Add(ExtractColumn(grid, i, gridDimLength).ToList());
+                lines.Add(ExtractRow(array, i, dim).ToList());
+                lines.Add(ExtractColumn(array, i, dim).ToList());
             }
 
-            lines.AddRange(ExtractDiagnals(array));
-            lines.AddRange(ExtractDiagnals(RotateMatrix(array)));
+            lines.AddRange(ExtractDiagnals(array, dim));
+            lines.AddRange(ExtractDiagnals(RotateMatrix(array, dim), dim));
 
             return lines;
         }
 
-        public char[] ExtractRow(char[,] array, int x, int length)
+        public char[] ExtractRow(char[,] array, int x, int dim)
         {
-            char[] row = new char[length];
-            for (int i = 0; i < length; i++)
+            char[] row = new char[dim];
+            for (int i = 0; i < dim; i++)
             {
                 row[i] = array[x, i];
             }
@@ -154,10 +155,10 @@ namespace Testavimas_2
             return row;
         }
 
-        public char[] ExtractColumn(char[,] array, int y, int length)
+        public char[] ExtractColumn(char[,] array, int y, int dim)
         {
-            char[] column = new char[length];
-            for (int i = 0; i < length; i++)
+            char[] column = new char[dim];
+            for (int i = 0; i < dim; i++)
             {
                 column[i] = array[i, y];
             }
@@ -165,10 +166,9 @@ namespace Testavimas_2
             return column;
         }
 
-        public List<List<char>> ExtractDiagnals(char[,] array)
+        public List<List<char>> ExtractDiagnals(char[,] array, int dim)
         {
             List<List<char>> lines = new List<List<char>>();
-            int dim = (int)Math.Sqrt(array.Length);
             for (int k = 0; k < dim * 2; k++)
             {
                 List<char> temp = new List<char>();
@@ -178,30 +178,36 @@ namespace Testavimas_2
                     if (i < dim && j < dim)
                     {
                         temp.Add(array[i, j]);
-                        Console.Write(array[i,j] + " ");
                     }
                 }
-                lines.Add(temp);
-                Console.WriteLine();
+                if(temp.Count != 0)
+                {
+                    lines.Add(temp);
+                }
+
             }
 
             return lines;
         }
 
-        public char[,] RotateMatrix(char[,] matrix)
+        public char[,] RotateMatrix(char[,] array, int dim)
         {
-            int dim = (int)Math.Sqrt(matrix.Length);
-            char[,] ret = new char[dim, dim];
+            char[,] rotated = new char[dim, dim];
 
             for (int i = 0; i < dim; ++i)
             {
                 for (int j = 0; j < dim; ++j)
                 {
-                    ret[i, j] = matrix[dim - j - 1, i];
+                    rotated[i, j] = array[dim - j - 1, i];
                 }
             }
 
-            return ret;
+            return rotated;
+        }
+
+        public int DimensionLength<T>(T[,] array)
+        {
+            return (int)Math.Sqrt(array.Length);
         }
     }
 }
