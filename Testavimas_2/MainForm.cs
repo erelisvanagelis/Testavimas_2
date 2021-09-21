@@ -18,6 +18,19 @@ namespace Testavimas_2
             InitializeComponent();
         }
 
+        private void UpdateState(string state)
+        {
+            turnButton.Text = game.GetTurn().ToString();
+            if(state == "Continue")
+            {
+                return;
+            }
+
+            flowLayoutPanel.Enabled = false;
+            turnButton.Enabled = true;
+            MessageBox.Show(state);
+        }
+
         private void startButton_Click(object sender, EventArgs e)
         {
             try
@@ -28,7 +41,7 @@ namespace Testavimas_2
                     xTurn = false;
                 }
                 
-                game = new Game(gridSizeTextBox.Text, 3, xTurn);
+                game = new Game(gridSizeTextBox.Text, UpdateState, winLineSizeTextBox.Text, xTurn);
                 PrepareTheBoard();
                 turnButton.Enabled = false;
             }
@@ -36,8 +49,6 @@ namespace Testavimas_2
             {
                 MessageBox.Show(exc.Message);
             }
-
-
         }
 
         private void PrepareTheBoard()
@@ -74,25 +85,6 @@ namespace Testavimas_2
             game.SetGridValue(c.X, c.Y);
             b.Text += game.GetGridValue(c.X, c.Y);
             b.Enabled = false;
-
-            if(game.GameWon())
-            {
-                flowLayoutPanel.Enabled = false;
-                turnButton.Enabled = true;
-
-                MessageBox.Show($"Game Won\nAnd The Winner Is: {turnButton.Text}");
-            }
-            else if(game.IsDraw())
-            {
-                flowLayoutPanel.Enabled = false;
-                turnButton.Enabled = true;
-
-                MessageBox.Show($"Game Over\nIt's A Draw");
-            }
-            else
-            {
-                turnButton.Text = game.GetTurn().ToString();
-            }
         }
 
         private void turnButton_Click(object sender, EventArgs e)

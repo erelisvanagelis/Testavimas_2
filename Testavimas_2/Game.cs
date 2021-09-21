@@ -15,15 +15,26 @@ namespace Testavimas_2
         public char[,] Grid { get => grid; set => grid = value; }
         public bool XTurn { get => xTurn; set => xTurn = value; }
 
-        public Game(string gridSize, int winLineSize = 3, bool xTurn = true)
+        public delegate void GameStateUpdater(string state);
+        private GameStateUpdater updateState;
+
+        public Game(string gridSize, GameStateUpdater updateState = null, string winLineSize = "3", bool xTurn = true)
         {
             if (String.IsNullOrWhiteSpace(gridSize))
                 throw new Exception("Wrong input");
 
-            int size = Convert.ToInt32(gridSize);
-            grid = new char[size, size];
-            this.winLineSize = winLineSize;
+            if (String.IsNullOrWhiteSpace(winLineSize))
+                throw new Exception("Wrong input");
+
+            
+            int dim = Convert.ToInt32(gridSize);
+            this.winLineSize = Convert.ToInt32(winLineSize);
+            if (dim < this.winLineSize)
+                throw new Exception("Win line size cannot be bigger than grid size");
+
+            grid = new char[dim, dim];
             this.xTurn = xTurn;
+            this.updateState = updateState;
         }
 
         public char GetTurn()
@@ -51,7 +62,7 @@ namespace Testavimas_2
         public void SetGridValue(int x, int y, char value)
         {
             grid[x, y] = value;
-            ChangeTurn();
+            EndTurn();
         }
 
         /// <summary>
@@ -62,6 +73,29 @@ namespace Testavimas_2
         public void SetGridValue(int x, int y)
         {
             SetGridValue(x, y, GetTurn());
+        }
+
+        public void EndTurn()
+        {
+            string state = "Continue";
+            if(GameWon())
+            {
+                state = GetTurn() + "Won";
+            }
+            else if(IsDraw())
+            {
+                state = "Draw";
+            }
+
+            if(state == "Continue")
+            {
+                ChangeTurn();
+            }
+
+            if(updateState != null)
+            {
+                updateState(state);
+            }
         }
 
         public char GetGridValue(int x, int y) => grid[x, y];
@@ -121,7 +155,7 @@ namespace Testavimas_2
 
             foreach(List<char> list in lines)
             {
-                if (ConsecutiveValueReached(list.ToArray(), GetTurn(!XTurn), winLineSize))
+                if (ConsecutiveValueReached(list.ToArray(), GetTurn(), winLineSize))
                 {
                     return true;
                 }

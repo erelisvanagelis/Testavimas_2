@@ -43,17 +43,24 @@ namespace Testavimas_2_Test
         [TestMethod]
         public void IsDraw_FullMatrix_true()
         {
+            char[,] test = new char[,] {
+                { 'X', 'O', 'X' },
+                { 'X', 'X', 'O' },
+                { 'X', 'O', 'X' }};
 
-            game = new Game("1");
-            game.SetGridValue(0, 0);
+            game.Grid = test;
             NUnit.Framework.Assert.IsTrue(game.IsDraw());
         }
 
         [TestMethod]
         public void IsDraw_EmptyMatrix_false()
         {
+            char[,] test = new char[,] {
+                { '\0', 'O', 'X' },
+                { 'X', 'X', 'O' },
+                { 'X', 'O', 'X' }};
 
-            game = new Game("1");
+            game.Grid = test;
             NUnit.Framework.Assert.IsFalse(game.IsDraw());
         }
 
@@ -184,7 +191,7 @@ namespace Testavimas_2_Test
                 { 'O', 'O', 'X' }};
 
             game.Grid = test;
-            game.XTurn = false;
+            game.XTurn = true;
 
             NUnit.Framework.Assert.IsTrue(game.GameWon());
         }

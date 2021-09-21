@@ -34,6 +34,8 @@ namespace Testavimas_2
             this.label1 = new System.Windows.Forms.Label();
             this.gridSizeTextBox = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.winLineSizeTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // turnButton
@@ -49,7 +51,7 @@ namespace Testavimas_2
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(619, 251);
+            this.startButton.Location = new System.Drawing.Point(617, 289);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(238, 38);
             this.startButton.TabIndex = 2;
@@ -60,7 +62,7 @@ namespace Testavimas_2
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(618, 222);
+            this.label1.Location = new System.Drawing.Point(640, 222);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 20);
             this.label1.TabIndex = 3;
@@ -68,9 +70,9 @@ namespace Testavimas_2
             // 
             // gridSizeTextBox
             // 
-            this.gridSizeTextBox.Location = new System.Drawing.Point(702, 219);
+            this.gridSizeTextBox.Location = new System.Drawing.Point(724, 219);
             this.gridSizeTextBox.Name = "gridSizeTextBox";
-            this.gridSizeTextBox.Size = new System.Drawing.Size(155, 26);
+            this.gridSizeTextBox.Size = new System.Drawing.Size(133, 26);
             this.gridSizeTextBox.TabIndex = 4;
             this.gridSizeTextBox.Text = "3";
             // 
@@ -81,11 +83,30 @@ namespace Testavimas_2
             this.flowLayoutPanel.Size = new System.Drawing.Size(600, 600);
             this.flowLayoutPanel.TabIndex = 5;
             // 
+            // winLineSizeTextBox
+            // 
+            this.winLineSizeTextBox.Location = new System.Drawing.Point(724, 251);
+            this.winLineSizeTextBox.Name = "winLineSizeTextBox";
+            this.winLineSizeTextBox.Size = new System.Drawing.Size(133, 26);
+            this.winLineSizeTextBox.TabIndex = 7;
+            this.winLineSizeTextBox.Text = "3";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(618, 254);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 20);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Win line size:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(867, 626);
+            this.Controls.Add(this.winLineSizeTextBox);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.flowLayoutPanel);
             this.Controls.Add(this.gridSizeTextBox);
             this.Controls.Add(this.label1);
@@ -107,6 +128,8 @@ namespace Testavimas_2
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox gridSizeTextBox;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
+        private System.Windows.Forms.TextBox winLineSizeTextBox;
+        private System.Windows.Forms.Label label2;
     }
 }
 
